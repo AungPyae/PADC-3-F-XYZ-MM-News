@@ -1,33 +1,60 @@
 package com.padcmyanmar.news.activities;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.padcmyanmar.news.R;
+import com.padcmyanmar.news.adapters.NewsAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.rv_news)
+    RecyclerView rvNews;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    private NewsAdapter mNewsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this, this);
+
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mNewsAdapter = new NewsAdapter();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        rvNews.setLayoutManager(linearLayoutManager);
+
+        /*
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        rvNews.setLayoutManager(gridLayoutManager);
+        */
+
+        rvNews.setAdapter(mNewsAdapter);
     }
 
     @Override
@@ -50,5 +77,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.fab)
+    public void onTapFab(View view) {
+        /*
+        Snackbar.make(view, "Replace with your own action - ButterKnife", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+                */
+
+        ObjectAnimator animObjX = ObjectAnimator.ofFloat(fab, "x", 0);
+        ObjectAnimator animObjY = ObjectAnimator.ofFloat(fab, "y", 0);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animObjX, animObjY);
+        animatorSet.setDuration(2000);
+        animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+        animatorSet.start();
     }
 }
