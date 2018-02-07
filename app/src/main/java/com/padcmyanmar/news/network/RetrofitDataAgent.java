@@ -1,8 +1,13 @@
 package com.padcmyanmar.news.network;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.padcmyanmar.news.events.LoadedNewsEvent;
+import com.padcmyanmar.news.events.SuccessLoginEvent;
 import com.padcmyanmar.news.network.responses.GetNewsResponse;
+import com.padcmyanmar.news.network.responses.LoginResponse;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,7 +38,7 @@ public class RetrofitDataAgent implements NewsDataAgent {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder() //2.
-                .baseUrl("http://padcmyanmar.com/padc-3/mm-news/apis/v1/")
+                .baseUrl("http://padcmyanmar.com/padc-3/mm-news/apis/")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(httpClient)
                 .build();
@@ -66,5 +71,26 @@ public class RetrofitDataAgent implements NewsDataAgent {
 
             }
         });
+    }
+
+    @Override
+    public void loginUser(final Context context, String phoneNo, String password) {
+        Call<LoginResponse> loginCall = mNewsApi.loginUser(phoneNo, password);
+        loginCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+                if(loginResponse != null) {
+                    SuccessLoginEvent event = new SuccessLoginEvent(loginResponse.getLoginUser(), context);
+                    EventBus.getDefault().post(event);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
+        Log.d("", "test log");
     }
 }

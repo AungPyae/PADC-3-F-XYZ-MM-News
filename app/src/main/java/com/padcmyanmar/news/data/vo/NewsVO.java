@@ -3,6 +3,7 @@ package com.padcmyanmar.news.data.vo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,14 +53,21 @@ public class NewsVO {
     }
 
     public List<FavoriteVO> getFavorites() {
+        if (favorites == null)
+            favorites = new ArrayList<>();
         return favorites;
     }
 
     public List<CommentVO> getComments() {
+        if (comments == null) {
+            comments = new ArrayList<>();
+        }
         return comments;
     }
 
     public List<SentToVO> getSentTos() {
+        if (sentTos == null)
+            sentTos = new ArrayList<>();
         return sentTos;
     }
 }

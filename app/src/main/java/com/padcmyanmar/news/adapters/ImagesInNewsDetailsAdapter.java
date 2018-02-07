@@ -9,14 +9,24 @@ import android.view.ViewGroup;
 import com.padcmyanmar.news.R;
 import com.padcmyanmar.news.viewitems.ImageInNewsDetailsViewItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by aung on 12/10/17.
  */
 
 public class ImagesInNewsDetailsAdapter extends PagerAdapter {
+
+    private List<String> mImages;
+
+    public ImagesInNewsDetailsAdapter() {
+        mImages = new ArrayList<>();
+    }
+
     @Override
     public int getCount() {
-        return 6;
+        return mImages.size();
     }
 
     @Override
@@ -37,6 +47,8 @@ public class ImagesInNewsDetailsAdapter extends PagerAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         ImageInNewsDetailsViewItem view = (ImageInNewsDetailsViewItem)
                 layoutInflater.inflate(R.layout.item_news_details_images, container, false);
+        view.setData(mImages.get(position));
+
         container.addView(view);
 
         return view;

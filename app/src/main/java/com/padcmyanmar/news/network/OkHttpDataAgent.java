@@ -1,5 +1,6 @@
 package com.padcmyanmar.news.network;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -40,6 +41,11 @@ public class OkHttpDataAgent implements NewsDataAgent {
     @Override
     public void loadNews() {
         new LoadNewsTask().execute("http://padcmyanmar.com/padc-3/mm-news/apis/v1/getMMNews.php");
+    }
+
+    @Override
+    public void loginUser(Context context, String email, String password) {
+
     }
 
     private static class LoadNewsTask extends AsyncTask<String, Void, String> {

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">PADC-3-F-XYZ-MM-News</string>
     <string name="action_settings">Settings</string>
 
@@ -13,4 +13,26 @@
 
 တွေ့ဆုံပွဲသို့ နိုင်ငံတော်၏ အတိုင်ပင်ခံပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည်နှင့်အတူ ပြည်ထောင်စုဝန်ကြီး ဦးဝင်းခိုင်၊ မန္တလေးတိုင်းဝန်ကြီးချုပ် ဒေါက်တာဇော်မြင့်မောင်၊ ဒုဝန်ကြီး ဦးမင်းသူနှင့် တာဝန်ရှိသူများ တက်ရောက်ခဲ့ကြောင်း သိရသည်။
     </string>
+
+    <string name="title_news_by_category">News by Category</string>
+    <string name="title_all_news">All News</string>
+
+    <string name="menu_item_all_news">All News</string>
+    <string name="menu_item_news_by_categories">News by Categories</string>
+
+    <string name="lbl_to_register">Register ပြုလုပ်ရန်</string>
+    <string name="lbl_to_login">Login ဝင်ရန်</string>
+    <string name="btn_to_register"><![CDATA[<b><i><u>Register ပြုလုပ်ရန်</u></i></b>]]></string>
+
+    <string name="btn_forgot_password"><![CDATA[<b><i><u>Password မေ့သွားလို့</u></i></b>]]></string>
+    <string name="lbl_logout">Logout</string>
+
+    <string name="msg_to_exit"><b><xliff:g id="name">%1$s</xliff:g></b>, Are you sure to exit MM-News</string>
+    <string name="msg_generic_no_data">လက်ရှိ data ပြစရာ မရှိသေးပါ</string>
+    <string name="lbl_refresh">Data ပြန် load လုပ်ရန်</string>
+
+    <string name="format_like_users"><xliff:g id="no_of_likes">%1$d</xliff:g> Likes</string>
+    <string name="format_comment_users"> - <xliff:g id="no_of_comment">%1$d</xliff:g> Comments</string>
+    <string name="format_sent_to_users"> - <xliff:g id="no_of_sent_tos">%1$d</xliff:g> Sent Tos</string>
+    <string name="btn_add_comment">Add Comment</string>
 </resources>

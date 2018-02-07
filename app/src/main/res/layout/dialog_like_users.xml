@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_app_icon"
+        android:layout_width="@dimen/app_icon_size"
+        android:layout_height="@dimen/app_icon_size"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/lbl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_toRightOf="@id/iv_app_icon"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Like Users"
+        android:textSize="@dimen/text_heading_1x" />
+
+    <ImageView
+        android:id="@+id/iv_close_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:foreground="@drawable/ripple_primary"
+        android:padding="@dimen/margin_medium"
+        android:src="@drawable/ic_cancel_24dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_like_users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_app_icon"
+        />
+
+</RelativeLayout>

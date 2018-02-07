@@ -1,5 +1,6 @@
 package com.padcmyanmar.news.network;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -131,6 +132,11 @@ public class HttpUrlConnectionDataAgent implements NewsDataAgent {
                 return null;
             }
         }.execute();
+    }
+
+    @Override
+    public void loginUser(Context context, String phoneNo, String password) {
+
     }
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {

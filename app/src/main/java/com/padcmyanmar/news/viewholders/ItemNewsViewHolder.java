@@ -35,7 +35,18 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.iv_news)
     ImageView ivNews;
 
+    @BindView(R.id.tv_likes)
+    TextView tvLikes;
+
+    @BindView(R.id.tv_comments)
+    TextView tvComments;
+
+    @BindView(R.id.tv_sent_tos)
+    TextView tvSentTos;
+
     private NewsActionDelegate mNewsActionDelegate;
+
+    private NewsVO mNews;
 
     public ItemNewsViewHolder(View itemView, NewsActionDelegate newsActionDelegate) {
         super(itemView);
@@ -47,16 +58,43 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.cv_news_item_root)
     public void onNewsItemTap(View view) {
         //Toast.makeText(view.getContext(), "News Item Clicked", Toast.LENGTH_LONG).show();
-        mNewsActionDelegate.onTapNewsItem();
+        mNewsActionDelegate.onTapNewsItem(mNews);
+    }
+
+    @OnClick(R.id.fl_send_to)
+    public void onTapSendTo(View view) {
+        mNewsActionDelegate.onTapSendToButton(mNews);
+    }
+
+    @OnClick(R.id.tv_likes)
+    public void onTapLikeUsers(View view) {
+        mNewsActionDelegate.onTapLikeUsers(mNews);
+    }
+
+    @OnClick(R.id.tv_comments)
+    public void onTapCommentUsers(View view) {
+        mNewsActionDelegate.onTapCommentUsers(mNews);
+    }
+
+    @OnClick(R.id.tv_sent_tos)
+    public void onTapSentToUsers(View view) {
+        mNewsActionDelegate.onTapSentToUsers(mNews);
+    }
+
+    @OnClick(R.id.fl_comment)
+    public void onTapAddComment(View view) {
+        mNewsActionDelegate.onTapCommentButton();
     }
 
     public void setNews(NewsVO news) {
+        mNews = news;
+
         tvPublicationTitle.setText(news.getPublication().getTitle());
         tvPostedDate.setText(news.getPostedDate());
         tvNewsBrief.setText(news.getBrief());
 
         Glide.with(ivPublicationLogo.getContext())
-                .load("http://image.tmdb.org/t/p/original" + news.getPublication().getLogo())
+                .load(news.getPublication().getLogo())
                 .into(ivPublicationLogo);
 
         if (news.getImages() != null) {
@@ -67,5 +105,17 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
         } else {
             ivNews.setVisibility(View.GONE);
         }
+
+        tvLikes.setText(
+                tvLikes.getContext().getResources().getString(R.string.format_like_users,
+                        news.getFavorites().size()));
+
+        tvComments.setText(
+                tvComments.getContext().getResources().getString(R.string.format_comment_users,
+                        news.getComments().size()));
+
+        tvSentTos.setText(
+                tvSentTos.getContext().getResources().getString(R.string.format_sent_to_users,
+                        news.getSentTos().size()));
     }
 }
