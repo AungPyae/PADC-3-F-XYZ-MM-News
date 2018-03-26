@@ -10,4 +10,6 @@ public interface LoginScreenDelegate {
      * To be able to navigate Register Screen.
      */
     void onTapToRegister();
+
+    void onTapLoginWithGoogle();
 }

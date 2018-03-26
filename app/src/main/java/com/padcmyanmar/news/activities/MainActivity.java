@@ -38,12 +38,15 @@ import com.padcmyanmar.news.delegates.NewsActionDelegate;
 import com.padcmyanmar.news.dialogs.AddCommentDialog;
 import com.padcmyanmar.news.dialogs.LikeUsersDialog;
 import com.padcmyanmar.news.events.LoadedNewsEvent;
+import com.padcmyanmar.news.services.SampleService;
 import com.padcmyanmar.news.viewpods.AccountControlViewPod;
 import com.padcmyanmar.news.viewpods.EmptyViewPod;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -198,7 +201,8 @@ public class MainActivity extends BaseActivity
         callToNumber(numberToCall);
         */
 
-        showConfirmDialog();
+        //showConfirmDialog();
+        startServiceComponent();
 
 
         /*
@@ -342,5 +346,11 @@ public class MainActivity extends BaseActivity
     public void onTapLoginUser() {
         Intent intent = UserProfileActivity.newIntent(getApplicationContext());
         startActivity(intent);
+    }
+
+    private void startServiceComponent() {
+        Intent intent = SampleService.newIntent(getApplicationContext(),
+                new Date().toString());
+        startService(intent);
     }
 }

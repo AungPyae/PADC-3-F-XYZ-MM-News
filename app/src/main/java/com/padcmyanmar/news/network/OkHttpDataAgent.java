@@ -26,9 +26,14 @@ import okhttp3.Response;
 public class OkHttpDataAgent implements NewsDataAgent {
 
     private static OkHttpDataAgent objInstance;
+    private OkHttpClient mOkHttpClient;
 
     private OkHttpDataAgent() {
-
+        mOkHttpClient = new OkHttpClient.Builder() //1.
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
     }
 
     public static OkHttpDataAgent getObjInstance() {
@@ -48,17 +53,11 @@ public class OkHttpDataAgent implements NewsDataAgent {
 
     }
 
-    private static class LoadNewsTask extends AsyncTask<String, Void, String> {
+    private class LoadNewsTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
             String url = urls[0];
-
-            OkHttpClient httpClient = new OkHttpClient.Builder() //1.
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .writeTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
-                    .build();
 
             RequestBody formBody = new FormBody.Builder() //2.
                     .add("access_token", "b002c7e1a528b7cb460933fc2875e916")
@@ -72,7 +71,7 @@ public class OkHttpDataAgent implements NewsDataAgent {
 
             String responseString = null;
             try {
-                Response response = httpClient.newCall(request).execute(); //4.
+                Response response = mOkHttpClient.newCall(request).execute(); //4.
                 if (response.isSuccessful() && response.body() != null) {
                     responseString = response.body().string();
                 }

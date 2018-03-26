@@ -76,6 +76,11 @@ public class LoginFragment extends Fragment {
         mLoginScreenDelegate.onTapToRegister();
     }
 
+    @OnClick(R.id.btn_login_with_google)
+    public void onTapLoginWithGoogle(View view) {
+        mLoginScreenDelegate.onTapLoginWithGoogle();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginUserSuccess(SuccessLoginEvent event) {
         if (getActivity() != null) {
